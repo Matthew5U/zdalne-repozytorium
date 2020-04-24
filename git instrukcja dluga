@@ -1,0 +1,140 @@
+Komendy Git:
+=====================================================================
+Utworzenie nowego repozytorium git:
+
+git init
+=====================================================================
+
+=====================================================================
+Kopia robocza lokalnego repozytorium:
+
+git clone /path/to/repository
+---------------------------------------------------------------------
+
+Kopię robocza na serwerze:
+
+git clone username@host:/path/to/repository
+=====================================================================
+
+=====================================================================
+Pprzeplyw pracy:
+Lokalne repozytorium sklada sie z 3 "drzew" zarzadzajacych przez git.
+1. Katalog roboczy - Przechwouje biezace pliki
+2. Index - Dziala jak poczekalnia
+3. Head - Wskazuje na ostatni utowrzony commit
+=====================================================================
+
+=====================================================================
+Zaproponowanie zmian (dodajac je do Index):
+
+git add <filename>
+
+git add *
+---------------------------------------------------------------------
+Rzeczywiste zatwierdzenie zmian aby pliki znalazly sie w HEAD a nie 
+w zdalnym repozytorium:
+
+git commit -m "Commit message"
+
+=====================================================================
+Zmiany sa obecnie w HEAD kopii roboczej. Aby wyslac zmiany do
+zdalnego repozytorium wykonaj:
+
+git push origin master
+
+(master mozna zmienic na galaz)
+---------------------------------------------------------------------
+Jesli nie sklonowałeś istniejącego repozytorium i chcesz polaczyc je
+ze zdalnym serwerem, musisz go dodac poprzez:
+
+git remote add origin <server>
+=====================================================================
+
+=====================================================================
+Utwórz nową galaz o nazwie "feature_x" i przelacz sie na nia:
+
+git checkout -b feature_x
+---------------------------------------------------------------------
+Przelacz się z powrotem na master:
+
+git checkout master
+---------------------------------------------------------------------
+Usun galaz:
+
+git branch -d feature_x
+---------------------------------------------------------------------
+Galaz nie jest dostepna dla innych dopoki nie wyslesz jej do zdalnego
+repozytorium:
+
+git push origin <branch>
+=====================================================================
+
+=====================================================================
+Aby zaktualizowac lokalne repozytorium do ostatniego commita wykonaj:
+
+git pull
+(w swoim katalogu poboczym aby pobrac(fetch) i scalic(merge) zdalne 
+zmian)
+---------------------------------------------------------------------
+Aby scalic inna galaz z galezia aktywna(np. master), uzyj:
+
+git merge <branch>
+---------------------------------------------------------------------
+Niestety nie zawsze jest to mozliwe i powoduje konfilkty. Jestes
+odpowiedzialny za ich scalanie. Recznie poprzez edycje plikow
+wskazanych przez git. Po zmianie musisz oznaczyc je jeko scalone
+poprzez: 
+
+git add <filename>
+---------------------------------------------------------------------
+Przed scaleniem zmian, mozesz je obejrzec uzywajac:
+
+git diff <source_branch> <target_branch>
+=====================================================================
+Zaleca sie tworzenie tagow dla wesji oprogramowania.
+Mozna utowrzyc tag o nazwie 1.0.0 wykonujac:
+
+git tag 1.0.0 1b2e1d63ff
+
+1b2e1d63ff to pierwsze 10 znakow numeru commita do ktorego odwoluje
+sie ten tag
+=====================================================================
+
+=====================================================================
+Mozna przegladac historie repozytorium uzywajac:
+
+git log
+---------------------------------------------------------------------
+Zobaczenie commita konkretnego autora:
+
+git log --author=bob
+---------------------------------------------------------------------
+Zobaczenie commita w pojedynczej lini:
+
+git log --pretty=oneline
+---------------------------------------------------------------------
+Zobaczenia drzewa w ASCII art wszystkich galezi opatrzone ich nazwami
+oraz nazwami tagow:
+
+git log --graph --oneline --decorate --all
+---------------------------------------------------------------------
+Zobaczenie plikow ktore zostaly zmienione:
+
+git log --name-status
+---------------------------------------------------------------------
+Wiecej:
+
+git log --help
+=====================================================================
+
+=====================================================================
+Wycofanie loklanych zmian poprzez:
+
+git checkout -- <filename>
+
+(Zastepuja zmiany w katalogu roboczym ostatnia zawartoscia HEAD. 
+Zmiany ktore zostaly juz dodane do index, tak jak nowe pliki zostana
+zachowane)
+---------------------------------------------------------------------
+Jesli chcesz porzucic wszystkie lokalne zmiany i commity pobierz 
+ostatnia historie z serwera i ustaw na nia swoja galez lokalna
