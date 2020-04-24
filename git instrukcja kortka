@@ -1,0 +1,370 @@
+INSTRUKCJA GIT
+
+--------------------------------------------------------------------------------------------
+1. Przejscie do katalogu w ktorym pracujemy
+2. Utowrzenie gita 
+	git init
+
+3. Utowrzenie folderu .gitignore i wrzucenie tam
+nazwy plikow ktore maja byc ignorowane
+
+3. Sprawdzenie gdzie znajudja sie pliki
+	git status
+
+4. Dodawanie do sledzenia
+	git add .
+
+5. Dodawanie do glownego ropozytorium
+	git commit -m "Komentarz od nas"
+
+--------------------------------------------------------------------------------------------
+1. Usuwanie plikow z poczekalni do katalogu roboczego
+	git reset
+
+2. Usuwanie niesledzonych plikow i katalogow
+	git clean -idf
+
+3. Usuwanie plikow zwiazanych ze srodowiskiem 
+uruchomieniowym aplikacji
+	git clean -xn
+
+3. Usuwanie plikow z repozytorium
+	git rm index.html
+
+3. Dodanie commita do usuniecia z repozytorium pliku
+	git commit -m "Komentarz"
+
+3. Cofniecie usuniecia 
+	git reset
+
+3. Przywracanie wersji pliku
+	git checkout index.html
+
+4. Przenoszenie plikow z repozytorium
+	git mv index.html
+
+--------------------------------------------------------------------------------------------
+1. Jesli zatwierdzimy add i wprowadzimy zmiany 
+w pliku to mozemy go przywrocic ze sledzenia po 
+przez komende (Odwrotne do git add)
+
+	git checkout -- index.html
+	
+--------------------------------------------------------------------------------------------
+1. Podejrzenie historii
+	git log
+
+1. Hisotria w jednej lini
+	git log --oneline
+
+1. Przyworcenie konkretnego commit (posiada numer)
+	git checkout -- ecc3a7e
+	
+Mozemy w nim wporwadzac eksperymentalne zmiany
+
+2. Jesli chcemy zapisac stworzone zmiany dodajemy 
+nowa galaz
+	git checkout -b nazwaNaszejGalezi
+
+2. Przywrocenie sciezki do pliku w konkretnego commita
+	git checkout -b nazwaNaszejGalezi js/app.js
+	
+3. Wrocenie do biezacej wersji projektu 
+	git checkout master
+
+4. Przywrocenie zmian z wybranego commita i zapisaniu
+ich jako nowy commit
+	git revert ecc3a7e
+
+5. Przywraca zmiany w repozytorium do wskazanego 
+punktu w historii zmian.
+STOSUJEMY JE TYLKO NA LOKLANYCH REPOZYTORIUM
+
+	git reset --mixed
+	  	  --soft
+	  	  --hard
+
+mixed (przywrocenie wszystkeigo do lokalnego folderu)
+soft (przywrocenie wszystkiego do sledzenia)
+hard (zmiany wszystkie do daneggo commita zostana usuniete)
+
+--------------------------------------------------------------------------------------------
+Przegladanie historii
+1. Przegladanie zmianw repozytorium
+	git log --oneline
+
+2. Przegladanie commitow danego autora
+	git log --author="Adam"
+
+3. Wyskzuwianie konkretne frazy w komentarzach commitow
+	git log --grep="view"
+
+4. Liczba commitow ktora chcemy zobaczyc
+	git log --online -3
+
+5. Zobaczenie zmian w danym katalogu
+	git log --online -- index.html
+
+6. Zobaczenie zmian w danym commite
+	git log -- online --patch -- naszFolderLubPlik
+
+7. Co zostalo zrobione z danym plikiem
+	git log --online --summary -- naszFolderLubPlik
+		 	 --stat
+
+stat - statystyki zmian w danym pliku
+
+8. Foramtowanie co chcemy zobaczyc
+	git log --format="%h %an %s (%cr)"
+
+9. Pokazuje historie zmian z podzialem na uzytkownikow 
+	git shortlog
+
+--------------------------------------------------------------------------------------------
+Pisanie komentarzy
+1. Podzial komentarza na tytul oraz tresc 
+	1.	git commit
+
+	2. Otwarcie dytora
+		Tytul komentarza
+
+		Opis komentarza	
+
+2. Ograniczenie dlugosci tytulu do 50 znakow
+
+3. Tytul rozpoczynami wielka litera
+
+4. Nie dodawaj kropki na koncu lini
+
+5. Uzywaj trybu rozkazujacego w tresci np. Dodaj do pola email wartosc
+
+6. Ogranicz dlugosc wiersza do 72 znakow, sami mamy lamac wiersz po 72 znakow
+
+7. Komentarz powinien odpowiadac co i dlaczego
+
+--------------------------------------------------------------------------------------------
+Polecenie stash
+1. Zmiany z roboczego zostana odlozone na bok
+	git stash
+
+2. Przejscie na inny branch
+	git checkout nazwaBrancha
+
+3. Przywrocenie zmian odlozonych na stos do nowego brancha
+	git stash pop
+
+4. Dodanie zmian na stos
+	git stash push -m "Dodanie komentarza do stostu"
+
+5. Lista zmian na stosie
+	git stash list
+
+6. Dodanie zmian do stosu 
+	1. Dodanie pliku do sledzenia i wtedy doodanie na liste
+
+	2. Z poczekalni dodadnie na stos po przez komende 
+		git 
+
+7. Przywracanie zmian ze stosu
+	1.Zmiany ze stosu do katalogu roboczego i zostaja na stosie
+		git stash apply stash@{1}
+
+	2.Zmiany ze stosu do katalogu roboczego i usuniecie ze stosu
+		git stash pop stash@{1}
+
+8. Usuwnaie zmian ze stosu bez przywracania do katalogu roboczego
+	1. Konkretny push
+		git stash drop stash@{0}
+	
+	2. Usuniecie wszystkiego
+		git stash clear
+
+--------------------------------------------------------------------------------------------
+1. Dodanie nowego brancha korzystajac ze stosu
+	1. git stash
+
+	2. git stash branch nazwaNowegoBrancha
+
+--------------------------------------------------------------------------------------------
+Branch innaczej jest to galaz
+
+1. Towrzenie nowego brancha
+	git branch nazwaNowejGalezi
+
+2. Lista dostepnych branchy
+	git branch
+
+3. Przelaczenie na brancha
+	git checkout nazwaNaszejGalezi
+
+4. Polaczenia brancha z masterem
+	1. Musimy nzajdowac sie na branch master
+		git checkout master
+
+	2. Scalenie 
+		git merge nazwaNaszejGalezi	
+
+	3. Sprawdzenie naszego scalenia 
+		git log --graph --decorate --all --online
+
+	4. Usuwanie galezi 
+		git branch -D nazwaNaszejGalezi
+
+--------------------------------------------------------------------------------------------
+Przyklad podzialu brancha 
+
+1. Master branch
+	Glowna galaz projektu, zaiwera stablina wersje projektu
+
+2. Developerski branch
+	Testowanie naszej aplikacji
+
+3. Feature branch
+	Galaz dedykowana nad nowymi funckjami
+	Jedna funckja jeden branch
+
+4. User branch
+	Galezie uzytkownikow sluza indywidulanej pracy  czlonkow zespolu nad zmianami
+
+5. Test/ Bugifx branch
+	Galezie do sprawdzania lub szybkiej zmiany wynikajacej z bledu ktory sie pojawil
+
+--------------------------------------------------------------------------------------------
+Laczenie ze zdalnym repozytorium posidajac dostep
+	1. Przejscie do katalogu w ktorym pracujemy
+
+	2. Utowrzenie repozytorium
+		git init
+	
+	3. Utowrzenie plikow z ktorymi pracujemy
+
+	4. Dodanie ich do sledzenia
+		git add .
+
+	5. Dodanie commita
+		git commit -m "Nowy plik"
+
+	6. Utowrzenie repozytorium np. github.com
+
+	7. Podlaczenie sie do konta przez konsole 
+		git remote add origin https://github.com/Matthew5U/zdalne-repozytorium.git
+		git push -u origin master
+
+	8. Podejrzenie historii
+		git log --all --decorate --oneline --graph
+
+	9. Pobranie zmian ze zdalnego repozytorium
+		git fetch
+
+	10. Zaktualizowanie lokalnego branch master
+		git merge origin/master
+
+--------------------------------------------------------------------------------------------
+Laczenie ze zdalnym repozytorium nieposiadajac dostepu
+
+Fork
+	Jest to kopia repozytorium
+
+	1. Naciskamy przycisk fork w gornej prawej rogu
+
+	2. Przyciskamy zielony przycisk clone or download i kopiujemy adres repozytorium
+
+	3. W terminalu wpisujemy
+		git clone tutajNaszSkopiowanyLinkRepozytorium
+	
+	4. Towrzymy nowy branch
+		git branch naszaNowaGalaz
+
+	5. Przjescie na nowa galaz
+		git checkout naszNowaGalaz
+
+	6. Wyslanie zmian do zdalnego repozytorium
+		git push -u origin naszaNowaGalaz
+
+	7. W githubie klikamy compare & pull request daje mozliwosc pokazania w naszym 
+	   repozytorium tego brancha
+
+	8. Mergownie daje nam mozliwosc laczenia galezi do mastera
+
+	9. Sprzatamy po wsyzstkim 
+	9. Usuwamy galaz ktora zostala zbranchowana
+		git branch -D naszaNowaGalaz
+	
+	10. Usuwamy zdalny branch 
+		git push origin --delete naszaNowaGalaz
+	
+	11. Dodanie zdlanego repozytorium 
+		git remote  add upstream linkDoNaszegoRepozytorium
+
+--------------------------------------------------------------------------------------------
+Rozwiazywanie konfilktow
+1. Konfilkt - Zmiany w pliku
+	Zmiany powinny byc wprowadzone w linijkach ktore posiadaja nastepujacy tekst
+	
+	<<<<<<<<< HEAD
+		<h1>overmnet.com</h1>
+	=========
+		<h2>ovemnet</h2>
+	>>>>>>>>> naszBranch	
+
+2. Konflikt - Usuniecie pliku
+	1. Zapisanie pliku
+		git add naszUsunietyPlik
+
+	2. Usuniecie pliku 
+		git rm naszUsunietyPlik
+
+3. Konflik miedzy master a galazia
+	1. Rozwiazanie po przez edytor na githubie
+
+	2. Przez wiersz polecen
+		1. pull remote branch
+		2. fix conflict
+		3. merge & push
+
+		1. Tworzymy nowa galaz
+		2. Pobieramy zmiany ze zdalnego repozytorium
+		3. Edytujemy plik w kotrym jest konflikt
+		4. Przelaczamy sie na mastera
+		5. Laczymy galezie 
+		6. Wysylamy do zdalnego repozytorium
+
+--------------------------------------------------------------------------------------------
+Rebase
+	Utowrzenie commitow na podstawie innych i cofniecia ich do mastera
+
+	1. Rebase do galezi master bedac w nowej galezi
+		git rebase master
+	2. Przjescie do mastera
+
+	3. Przesuniecie wskaznika 
+		git merge naszaNowaGalaz  
+	
+	4. Uporanie sie z konfilktem
+	5. Uzycie git rebase --continue
+
+--------------------------------------------------------------------------------------------
+Tagi
+	Zakladki mowiace o wersjach danych aplikacji commitow
+	
+	1. Dodanie tagu
+		git tag v1.0
+
+	2. Usuniecie tagu 
+		git tag -d v1.0
+
+	3. Dodanie tagu z nazwa autora 
+		git tag v1.0 -a -m "Nasz komentarz" 
+		
+	4. Mozliwosc dodania tagu do konkretnegu commita 
+	
+	5. Wyslanie tagow
+		git push --tags
+	
+	6. Wyslanie jednego tagu
+		git push origin v1.0
+
+	7. Usuwanie tagow ze zdalnego repozytorium
+		git push origin -d v1.0
+
+
